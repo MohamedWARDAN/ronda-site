@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ronda — Invitation à jouer</title>
+<style>
+  :root { --vert: #1E4A33; --or: #C9A227; --creme: #FFF8E7; --texte: #1E1E1E; }
+  body { margin: 0; font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif; background: var(--creme); color: var(--texte); line-height: 1.55; }
+  header { background: var(--vert); color: #fff; padding: 22px 16px; text-align: center; }
+  header h1 { margin: 0; font-size: 1.5rem; } header p { margin: 6px 0 0; color: #F2D98B; }
+  main { max-width: 480px; margin: 0 auto; padding: 8px 16px 40px; text-align: center; }
+  .code { font-size: 2.4rem; font-weight: 800; letter-spacing: .25em; background: #fff; border: 2px solid var(--or);
+          border-radius: 12px; padding: 18px 10px; margin: 18px 0; color: var(--vert); }
+  .bouton { display: inline-block; background: var(--or); color: #1E1E1E; padding: 14px 22px; border-radius: 10px;
+            text-decoration: none; font-weight: 700; margin: 8px 0; }
+  .note { background: #fff; border-left: 4px solid var(--or); padding: 10px 14px; text-align: left; margin-top: 24px; }
+  [dir="rtl"] { text-align: center; font-family: Tahoma, "Segoe UI", Arial, sans-serif; }
+  [dir="rtl"] .note { text-align: right; }
+  footer { text-align: center; color: #666; font-size: .9rem; padding: 20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ronda — روندا</h1>
+  <p>Jeu de cartes marocain · لعبة الورق المغربية</p>
+</header>
+<main>
+  <p id="intro">Un ami t'invite à jouer une partie de Ronda !</p>
+  <div class="code" id="code">······</div>
+  <p id="have-app">Si tu as déjà Ronda installé, le code est déjà prêt : ouvre « Jouer en ligne » → « Rejoindre »
+     et colle-le (ou recopie-le s'il n'y est pas déjà).</p>
+  <p><a class="bouton" id="store-link" href="https://play.google.com/store/apps/details?id=com.rondagame.ronda">Télécharger Ronda</a></p>
+
+  <div class="note">
+    <strong>Pas encore le jeu ?</strong> Installe Ronda, ouvre-le, puis « Jouer en ligne » → « Rejoindre » avec
+    le code ci-dessus.
+  </div>
+
+  <section dir="rtl" lang="ar" style="margin-top:28px">
+    <p>صديقك يدعوك للعب جولة من روندا! الرمز: <strong id="code-ar">······</strong></p>
+    <p>إذا كان التطبيق مثبتا عندك، افتح «اللعب عبر الإنترنت» ← «انضمام» وأدخل الرمز.
+       إذا لم يكن مثبتا، نزّله أولا.</p>
+  </section>
+</main>
+<footer>Ronda — m.wardan</footer>
+<script>
+  // Code lu dans l'adresse (?code=ABC123), affiché tel quel : jamais envoyé nulle part depuis cette page.
+  var params = new URLSearchParams(window.location.search);
+  var code = (params.get('code') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+  if (code) {
+    document.getElementById('code').textContent = code;
+    document.getElementById('code-ar').textContent = code;
+  } else {
+    document.getElementById('intro').textContent = "Ce lien d'invitation ne contient pas de code valide.";
+    document.getElementById('code').style.display = 'none';
+    document.getElementById('have-app').style.display = 'none';
+  }
+</script>
+</body>
+</html>
